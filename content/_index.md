@@ -11,8 +11,12 @@ template = "index.html"
 
 ---
 
-### [ Artifacts & Research ]
+### [ Philosophy & Research ]
 This site is a public log for my technical research, writeups and software.
+
+I use generative ai to learn, but would be uncomfortable writing code or articles I didn't understand so I try to learn as much of the technology as possible.
+
+I also appreciate and support open source software, and try to use it wherever I can.
 
 - **Preferred OS:** openSUSE tumbleweed
 - **Primary Tools:** Neovim, Python, Qwen3.5
