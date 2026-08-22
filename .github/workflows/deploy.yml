@@ -1,17 +1,15 @@
-name: Deploy Zola to GitHub Pages
+name: Build and deploy Zola website
 
 on:
   push:
     branches:
-      - main 
+      - main # Change to 'master' if that is your default branch
 
-# Required permissions for GitHub Pages deployment
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Prevent concurrent deployments from colliding
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -20,22 +18,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
-          submodules: recursive # Critical for fetching the Anemone theme
+          # Crucial: If the Anemone theme for shiosaiiLabs is a Git submodule, 
+          # this ensures it actually gets pulled. Missing this is the #1 cause 
+          # of Zola builds failing after the action itself succeeds.
+          submodules: recursive 
 
-      - name: Build Zola and Upload Artifact
-        uses: getzola/github-pages@v2
+      - name: Build Zola + upload Pages artifact
+        uses: getzola/github-pages@master # <-- The fix: Use @master instead of @v2
         with:
-          zola_version: '0.19.1' # Adjust to your local version if needed
-
+          zola_version: v0.23.3 # Update this to match your local version
+          
   deploy:
+    runs-on: ubuntu-latest
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
