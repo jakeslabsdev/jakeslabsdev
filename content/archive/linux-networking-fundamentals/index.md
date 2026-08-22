@@ -9,9 +9,9 @@ tags = ["Linux", "Networking", "bash"]
 
 # Networking with GNU/Linux
 
-My first area of research has to be in networking, and thankfully Linux is a perfect operating system to use to explore this as it's completely transparent meaning the whole network stack is now open to you.
+My first area of research has to be in networking, and thankfully Linux is a perfect operating system to use to explore this as it's completely transparent meaning the whole network stack is open to you.
 
-I'm running openSUSE Tumbleweed and I use `bash` which is the most common shell in the Linux ecosystem, meaning that the most of the utilities I use in the article should be available to you being prepackaged with every Linux distribution I've come across so far.
+I'm running openSUSE Tumbleweed and I use `bash` which is the most common shell in the Linux ecosystem, meaning that most of the utilities I use in the article should be available to you being prepackaged with every Linux distribution I've come across so far.
 
 # Absolute Basics of Networking
 
@@ -31,6 +31,7 @@ Use this utility to control **interfaces, IP addresses, routing tables & tunnels
 - `ip link set` to bring an interface **up or down**.
 - `ip route` to view default gateways and **routing tables**.
 - Find more in the **manual page** with the `man` utility.
+
 **Scope**: Works on any network device.
 
 ## `iw`; Wireless Specific Tool
@@ -51,7 +52,7 @@ Controls **high level connection profiles**, switching **Wi-Fi networks**, autom
 When to use it: When managing how your system connects day to day.
 - Connecting to a *new Wi-Fi network or entering a password*
 - **Setting static IP** address or **changing DNS servers**
--**Listing saved connection** profiles `nmcli connection show`
+- **Listing saved connection** profiles `nmcli connection show`
 
 **Scope**: High level automation, it uses ip and other tools to communicate with the kernel.
 
