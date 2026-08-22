@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://jakeslabs.dev"
+base_url = "https://jakeslabs.dev/"
 # Global Theme
 theme = "anemone"
 
