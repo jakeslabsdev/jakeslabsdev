@@ -1,0 +1,24 @@
+{% extends "anemone/templates/base.html" %}
+
+{% block content %}
+<div class="taxonomy-single">
+    <h1>Pages tagged with "{{ term.name }}"</h1>
+    
+    <table class="article-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for page in term.pages %}
+            <tr>
+                <td>{{ page.date | date(format="%Y-%m-%d") }}</td>
+                <td><a href="{{ page.permalink }}">{{ page.title }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

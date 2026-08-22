@@ -1,0 +1,60 @@
+{% extends "anemone/templates/index.html" %}
+
+{% block content %}
+{{ section.content | safe }}
+
+<h2 id="latest-articles">Latest Articles</h2>
+{% set archive_data = get_section(path="archive/_index.md") %}
+
+<table class="article-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        {# Collect all pages into a temporary flat array using separate push/set logic if needed, 
+           or loop through sections directly to render the latest 5 items cleanly #}
+        
+        {% set_global count = 0 %}
+        
+        {# 1. Render pages directly from the main archive section first #}
+        {% if archive_data.pages %}
+            {% for page in archive_data.pages | sort(attribute="date") | reverse %}
+                {% if count < 5 %}
+                <tr>
+                    <td>{{ page.date | date(format="%Y-%m-%d") }}</td>
+                    <td><a href="{{ page.permalink }}">{{ page.title }}</a></td>
+                </tr>
+                {% set_global count = count + 1 %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        
+        {# 2. Continue filling up to 5 from subsections if needed #}
+        {% if archive_data.subsections and count < 5 %}
+            {% for sub in archive_data.subsections %}
+                {% set sub_section = get_section(path=sub) %}
+                {% if sub_section.pages %}
+                    {% for page in sub_section.pages | sort(attribute="date") | reverse %}
+                        {% if count < 5 %}
+                        <tr>
+                            <td>{{ page.date | date(format="%Y-%m-%d") }}</td>
+                            <td><a href="{{ page.permalink }}">{{ page.title }}</a></td>
+                        </tr>
+                        {% set_global count = count + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if count == 0 %}
+            <tr>
+                <td colspan="2">No articles yet.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock content %}
