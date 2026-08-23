@@ -76,6 +76,7 @@ You must routinely strike the cache down, but it is good practice to keep the la
 
 There's no better practice than directly working with the tool yourself, but if you find yourself unable to tinker with `pacman` at the moment, please see the interactive `pacman` command building sandbox I made below!
 
+---
 
 <style>
   :root {
