@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
+{% block content %}
 {{ super() }}
 {% include "partials/schema-article.html" %}
 
-
-{% block content %}
 <article class="post">
     <header class="post-header">
         {% if page.date and page.extra.display_published | default(value=true) %}
@@ -25,7 +24,7 @@
 {% if page.extra.toc and page.toc %}
 <div class="toc-container">
     <h2>Table of content</h2>
-    <ul> 
+    <ul>
         {% for h1 in page.toc %}
         <li>
             <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
